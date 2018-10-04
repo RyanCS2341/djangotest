@@ -1,0 +1,5 @@
+{ "A" : {{ request.GET.inputone }},
+  "B" : {{ request.GET.inputtwo }},
+  "params" : [ {{ request.GET.inputone }}, {{ request.GET.inputtwo }} ],
+"msg" : "{{message}}"
+ }

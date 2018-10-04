@@ -1,0 +1,46 @@
+{% extends 'operations/index.html' %}
+
+{% block script %}
+  <!-- Script Start -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+  <script>
+    $(function() {
+      $("#gobtn").click(function() {
+        var num1 = $("#firstNum").val();
+        var num2 = $("#secondNum").val();
+        console.log(num1);
+        console.log(num2);
+
+        $.get("/ops/query",
+          // query data:
+          {
+            'inputone': num1,
+            'inputtwo': num2,
+            'op' : 'sub'
+          }).done(
+          // success function:
+          function(data) {
+            console.log("Load was performed.");
+            $(".result").html(data.msg);
+          }).fail(function(xhr, ajaxOptions, thrownError) {
+          console.log(xhr.status);
+          console.log(thrownError);
+        });
+      });
+    });
+  </script>
+  <!-- Script End -->
+{% endblock %}
+
+{% block content %}
+  <h1>Subtraction</h1>
+
+  <form>
+    <input type="text" id="firstNum"><br />
+    <input type="text" id="secondNum"><br/>
+    <button type="button" id="gobtn">Go</button>
+  </form>
+
+  <div class="result"> waiting... </div>
+{% endblock %}
